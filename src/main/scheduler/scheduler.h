@@ -19,6 +19,8 @@
 
 #include "common/time.h"
 
+//#define SCHEDULER_DEBUG
+
 typedef enum {
     TASK_PRIORITY_IDLE = 0,     // Disables dynamic scheduling, task is executed only if no other task is active this cycle
     TASK_PRIORITY_LOW = 1,
@@ -147,8 +149,10 @@ typedef struct {
 
     /* Statistics */
     timeUs_t movingSumExecutionTime;  // moving sum over 32 samples
+#ifndef SKIP_TASK_STATISTICS
     timeUs_t maxExecutionTime;
     timeUs_t totalExecutionTime;    // total time consumed by task since boot
+#endif
 } cfTask_t;
 
 extern cfTask_t cfTasks[TASK_COUNT];

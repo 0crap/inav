@@ -22,5 +22,4 @@
 #define FEET_PER_KILOFEET                       1000 // Used for altitude
 #define METERS_PER_KILOMETER                    1000
 #define METERS_PER_MILE                         1609.344
-#define METERS_PER_FOOT                         3.28084
 #define METERS_PER_NAUTICALMILE                 1852.001

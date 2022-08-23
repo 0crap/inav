@@ -303,6 +303,7 @@ bool spektrumInit(const rxConfig_t *rxConfig, rxRuntimeConfig_t *rxRuntimeConfig
         spek_chan_mask = 0x07;
         spekHiRes = true;
         rxRuntimeConfig->channelCount = SPEKTRUM_2048_CHANNEL_COUNT;
+        rxRuntimeConfig->rxRefreshRate = 11000;
         break;
     case SERIALRX_SPEKTRUM1024:
         // 10 bit frames
@@ -310,6 +311,7 @@ bool spektrumInit(const rxConfig_t *rxConfig, rxRuntimeConfig_t *rxRuntimeConfig
         spek_chan_mask = 0x03;
         spekHiRes = false;
         rxRuntimeConfig->channelCount = SPEKTRUM_1024_CHANNEL_COUNT;
+        rxRuntimeConfig->rxRefreshRate = 22000;
         break;
     }
 

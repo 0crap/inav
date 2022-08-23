@@ -73,6 +73,8 @@
 
 #define PITOT_I2C_BUS           BUS_I2C2
 #define TEMPERATURE_I2C_BUS     BUS_I2C2
+#define BNO055_I2C_BUS          BUS_I2C2
+
 
 // *************** SPI2 RM3100 **************************
 #define USE_SPI_DEVICE_2

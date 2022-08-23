@@ -27,12 +27,14 @@
 #include "config/parameter_group.h"
 #include "common/time.h"
 #include "sensors/sensors.h"
+#include "drivers/accgyro/accgyro_bno055.h"
 #include "drivers/accgyro/accgyro_bno055_serial.h"
 #include "sensors/diagnostics.h"
 
 typedef enum {
     SECONDARY_IMU_NONE          = 0,
-    SECONDARY_IMU_BNO055_SERIAL = 1,
+    SECONDARY_IMU_BNO055        = 1,
+    SECONDARY_IMU_BNO055_SERIAL = 2,
 } secondaryImuType_e;
 
 typedef struct secondaryImuConfig_s {

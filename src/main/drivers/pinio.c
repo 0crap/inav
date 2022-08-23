@@ -60,7 +60,7 @@ const pinioHardware_t pinioHardware[] = {
 #endif
 };
 
-const int pinioHardwareCount = ARRAYLEN(pinioHardware);
+const int pinioHardwareCount = sizeof(pinioHardware) / sizeof(pinioHardware[0]);
 
 /*** Runtime configuration ***/
 typedef struct pinioRuntime_s {

@@ -134,6 +134,10 @@ static bool escSensorDecodeFrame(void)
             escSensorData[escSensorMotor].rpm           = computeRpm(((uint16_t)telemetryBuffer[7]) << 8 | telemetryBuffer[8]);
             escSensorDataNeedsUpdate = true;
 
+            if (escSensorMotor < 4) {
+                DEBUG_SET(DEBUG_ERPM, escSensorMotor, escSensorData[escSensorMotor].rpm);
+            }
+
             return ESC_SENSOR_FRAME_COMPLETE;
         }
         else {

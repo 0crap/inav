@@ -148,7 +148,7 @@ It is unlikely that the typical user will need to employ these options, other th
 * Configure `cmake` to use `ninja` as the build system
 
   ```
-  cd build
+  cd buid
   # add other cmake options as required.
   cmake -GNinja ..
   ```

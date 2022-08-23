@@ -65,7 +65,7 @@ bool pitotInit(void);
 bool pitotIsCalibrationComplete(void);
 void pitotStartCalibration(void);
 void pitotUpdate(void);
-float getAirspeedEstimate(void);
+int32_t pitotCalculateAirSpeed(void);
 bool pitotIsHealthy(void);
 
 #endif

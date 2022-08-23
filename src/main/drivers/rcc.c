@@ -11,6 +11,11 @@ void RCC_ClockCmd(rccPeriphTag_t periphTag, FunctionalState NewState)
     uint32_t mask = 1 << (periphTag & 0x1f);
 
     switch (tag) {
+#if defined(STM32F3)
+    case RCC_AHB:
+        RCC_BIT_CMD(RCC->AHBENR, mask, NewState);
+        break;
+#endif
 
 #if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
     case RCC_AHB1:
@@ -67,6 +72,11 @@ void RCC_ResetCmd(rccPeriphTag_t periphTag, FunctionalState NewState)
     uint32_t mask = 1 << (periphTag & 0x1f);
 
     switch (tag) {
+#if defined(STM32F3)
+    case RCC_AHB:
+        RCC_BIT_CMD(RCC->AHBRSTR, mask, NewState);
+        break;
+#endif
 
 #if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
     case RCC_AHB1:

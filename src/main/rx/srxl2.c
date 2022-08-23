@@ -490,6 +490,8 @@ bool srxl2RxInit(const rxConfig_t *rxConfig, rxRuntimeConfig_t *rxRuntimeConfig)
 
     rxRuntimeConfig->channelData = channelData;
     rxRuntimeConfig->channelCount = SRXL2_MAX_CHANNELS;
+    rxRuntimeConfig->rxRefreshRate = SRXL2_FRAME_PERIOD_US;
+
     rxRuntimeConfig->rcReadRawFn = srxl2ReadRawRC;
     rxRuntimeConfig->rcFrameStatusFn = srxl2FrameStatus;
     rxRuntimeConfig->rcProcessFrameFn = srxl2ProcessFrame;

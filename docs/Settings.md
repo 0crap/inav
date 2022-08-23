@@ -338,7 +338,7 @@ Internal (configurator) hint. Should not be changed manually
 
 | Default | Min | Max |
 | --- | --- | --- |
-| 0 | 0 | 4 |
+| 0 | 0 | 3 |
 
 ---
 
@@ -359,6 +359,16 @@ Selection of baro hardware. See Wiki Sensor auto detect and hardware failure det
 | Default | Min | Max |
 | --- | --- | --- |
 | AUTO |  |  |
+
+---
+
+### baro_median_filter
+
+3-point median filtering for barometer readouts. No reason to change this setting
+
+| Default | Min | Max |
+| --- | --- | --- |
+| ON | OFF | ON |
 
 ---
 
@@ -752,16 +762,6 @@ Defines the type of stage 1 D-term LPF filter. Possible values: `PT1`, `BIQUAD`,
 
 ---
 
-### dynamic_gyro_notch_3d_q
-
-Q factor for 3D dynamic notches
-
-| Default | Min | Max |
-| --- | --- | --- |
-| 200 | 1 | 1000 |
-
----
-
 ### dynamic_gyro_notch_enabled
 
 Enable/disable dynamic gyro notch also known as Matrix Filter
@@ -782,16 +782,6 @@ Minimum frequency for dynamic notches. Default value of `150` works best with 5"
 
 ---
 
-### dynamic_gyro_notch_mode
-
-Gyro dynamic notch type
-
-| Default | Min | Max |
-| --- | --- | --- |
-| 2D |  |  |
-
----
-
 ### dynamic_gyro_notch_q
 
 Q factor for dynamic notches
@@ -799,6 +789,76 @@ Q factor for dynamic notches
 | Default | Min | Max |
 | --- | --- | --- |
 | 120 | 1 | 1000 |
+
+---
+
+### eleres_freq
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 435 | 415 | 450 |
+
+---
+
+### eleres_loc_delay
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 240 | 30 | 1800 |
+
+---
+
+### eleres_loc_en
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| OFF | OFF | ON |
+
+---
+
+### eleres_loc_power
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 7 | 0 | 7 |
+
+---
+
+### eleres_signature
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 0 |  | 4294967295 |
+
+---
+
+### eleres_telemetry_en
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| OFF | OFF | ON |
+
+---
+
+### eleres_telemetry_power
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 7 | 0 | 7 |
 
 ---
 
@@ -1354,7 +1414,7 @@ Yaw Iterm is frozen when bank angle is above this threshold [degrees]. This solv
 
 ### gps_auto_baud
 
-Automatic configuration of GPS baudrate(The specified baudrate in configured in ports will be used) when used with UBLOX GPS
+Automatic configuration of GPS baudrate(The specified baudrate in configured in ports will be used) when used with UBLOX GPS. When used with NAZA/DJI it will automatic detect GPS baudrate and change to it, ignoring the selected baudrate set in ports
 
 | Default | Min | Max |
 | --- | --- | --- |
@@ -3032,16 +3092,6 @@ Launch idle throttle - throttle to be set before launch sequence is initiated. I
 
 ---
 
-### nav_fw_launch_manual_throttle
-
-Allows launch with manually controlled throttle. INAV only levels wings and controls climb pitch during launch. Throttle is controlled directly by throttle stick movement. IF USED WITHOUT A GPS LOCK plane must be launched immediately after throttle is increased to avoid issues with climb out stabilisation and the launch ending sooner than expected (launch end timer starts as soon as the throttle stick is raised).
-
-| Default | Min | Max |
-| --- | --- | --- |
-| OFF | OFF | ON |
-
----
-
 ### nav_fw_launch_max_altitude
 
 Altitude (centimeters) at which LAUNCH mode will be turned off and regular flight mode will take over [0-60000].
@@ -3299,36 +3349,6 @@ Pitch Angle deadband when soaring mode enabled (deg). Angle mode inactive within
 | Default | Min | Max |
 | --- | --- | --- |
 | 5 | 0 | 15 |
-
----
-
-### nav_fw_wp_tracking_accuracy
-
-Waypoint tracking accuracy forces the craft to quickly head toward and track along the waypoint course line as closely as possible. Settings 1 to 10 adjust the course tracking response. Higher values dampen the response reducing possible overshoot. A value of 5 is a good starting point. Set to 0 to disable.
-
-| Default | Min | Max |
-| --- | --- | --- |
-| 0 | 0 | 10 |
-
----
-
-### nav_fw_wp_tracking_max_angle
-
-Sets the maximum allowed alignment convergence angle to the waypoint course line when nav_fw_wp_tracking_accuracy is active [degrees]. Lower values result in smoother alignment with the course line but will take more distance until this is achieved.
-
-| Default | Min | Max |
-| --- | --- | --- |
-| 60 | 30 | 80 |
-
----
-
-### nav_fw_wp_turn_smoothing
-
-Smooths turns during WP missions by switching to a loiter turn at waypoints. When set to ON the craft will reach the waypoint during the turn. When set to ON-CUT the craft will turn inside the waypoint without actually reaching it (cuts the corner).
-
-| Default | Min | Max |
-| --- | --- | --- |
-| OFF |  |  |
 
 ---
 
@@ -3862,26 +3882,6 @@ If set to ON drone will return tail-first. Obviously meaningless for airplanes.
 
 ---
 
-### nav_rth_trackback_distance
-
-Maximum distance allowed for RTH trackback. Normal RTH is executed once this distance is exceeded [m].
-
-| Default | Min | Max |
-| --- | --- | --- |
-| 500 | 50 | 2000 |
-
----
-
-### nav_rth_trackback_mode
-
-Useage modes for RTH Trackback. OFF = disabled, ON = Normal and Failsafe RTH, FS = Failsafe RTH only.
-
-| Default | Min | Max |
-| --- | --- | --- |
-| OFF |  |  |
-
----
-
 ### nav_use_fw_yaw_control
 
 Enables or Disables the use of the heading PID controller on fixed wing. Heading PID controller is always enabled for rovers and boats
@@ -3914,11 +3914,11 @@ Defines how Pitch/Roll input from RC receiver affects flight in POSHOLD mode: AT
 
 ### nav_wp_enforce_altitude
 
-Forces craft to achieve the set WP altitude as well as position before moving to next WP. Position is held and altitude adjusted as required before moving on. 0 = disabled, otherwise setting defines altitude capture tolerance [cm], e.g. 100 means required altitude is achieved when within 100cm of waypoint altitude setting.
+Forces craft to achieve the set WP altitude as well as position before moving to next WP. Position is held and altitude adjusted as required before moving on.
 
 | Default | Min | Max |
 | --- | --- | --- |
-| 0 | 0 | 2000 |
+| OFF | OFF | ON |
 
 ---
 
@@ -4034,7 +4034,7 @@ Max pitch, in degrees, for OSD artificial horizon
 
 ### osd_ahi_reverse_roll
 
-Switches the artificial horizon in the OSD to instead be a bank indicator, by reversing the direction of its movement.
+_// TODO_
 
 | Default | Min | Max |
 | --- | --- | --- |
@@ -5092,33 +5092,13 @@ Exposition value used for the PITCH/ROLL axes by all the stabilized flights mode
 
 ---
 
-### rc_filter_auto
-
-When enabled, INAV will set RC filtering based on refresh rate and smoothing factor.
-
-| Default | Min | Max |
-| --- | --- | --- |
-| OFF | OFF | ON |
-
----
-
-### rc_filter_lpf_hz
+### rc_filter_frequency
 
 RC data biquad filter cutoff frequency. Lower cutoff frequencies result in smoother response at expense of command control delay. Practical values are 20-50. Set to zero to disable entirely and use unsmoothed RC stick values
 
 | Default | Min | Max |
 | --- | --- | --- |
-| 50 | 15 | 250 |
-
----
-
-### rc_filter_smoothing_factor
-
-The RC filter smoothing factor. The higher the value, the more smoothing but also the more delay in response. Value 1 sets the filter at half the refresh rate. Value 100 sets the filter to aprox. 10% of the RC refresh rate
-
-| Default | Min | Max |
-| --- | --- | --- |
-| 30 | 1 | 100 |
+| 50 | 0 | 100 |
 
 ---
 
@@ -5289,6 +5269,36 @@ Defines the shortest pulse width value used when ensuring the channel value is v
 | Default | Min | Max |
 | --- | --- | --- |
 | 885 | PWM_PULSE_MIN | PWM_PULSE_MAX |
+
+---
+
+### rx_spi_id
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 0 | 0 | 0 |
+
+---
+
+### rx_spi_protocol
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| _target default_ |  |  |
+
+---
+
+### rx_spi_rf_channel_count
+
+_// TODO_
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 0 | 0 | 8 |
 
 ---
 

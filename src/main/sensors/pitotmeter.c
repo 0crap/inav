@@ -58,7 +58,6 @@ PG_REGISTER_WITH_RESET_TEMPLATE(pitotmeterConfig_t, pitotmeterConfig, PG_PITOTME
 #else
 #define PITOT_HARDWARE_DEFAULT    PITOT_NONE
 #endif
-
 PG_RESET_TEMPLATE(pitotmeterConfig_t, pitotmeterConfig,
     .pitot_hardware = SETTING_PITOT_HARDWARE_DEFAULT,
     .pitot_lpf_milli_hz = SETTING_PITOT_LPF_MILLI_HZ_DEFAULT,
@@ -206,11 +205,6 @@ STATIC_PROTOTHREAD(pitotThread)
         }
 
         pitot.dev.calculate(&pitot.dev, &pitotPressureTmp, NULL);
-#ifdef USE_SIMULATOR
-    	if (simulatorData.flags & SIMU_AIRSPEED) {
-        	pitotPressureTmp = sq(simulatorData.airSpeed) * SSL_AIR_DENSITY / 20000.0f + SSL_AIR_PRESSURE;
-    	}
-#endif
         ptYield();
 
         // Filter pressure
@@ -232,13 +226,8 @@ STATIC_PROTOTHREAD(pitotThread)
             pitot.airSpeed = pitotmeterConfig()->pitot_scale * fast_fsqrtf(2.0f * fabsf(pitot.pressure - pitot.pressureZero) / SSL_AIR_DENSITY) * 100;
         } else {
             performPitotCalibrationCycle();
-            pitot.airSpeed = 0.0f;
+            pitot.airSpeed = 0;
         }
-#ifdef USE_SIMULATOR
-    	if (simulatorData.flags & SIMU_AIRSPEED) {
-        	pitot.airSpeed = simulatorData.airSpeed;
-    	}
-#endif
     }
 
     ptEnd(0);
@@ -249,7 +238,7 @@ void pitotUpdate(void)
     pitotThread();
 }
 
-float getAirspeedEstimate(void)
+int32_t pitotCalculateAirSpeed(void)
 {
     return pitot.airSpeed;
 }

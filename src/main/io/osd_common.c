@@ -53,7 +53,7 @@ PG_RESET_TEMPLATE(osdCommonConfig_t, osdCommonConfig,
     .speedSource = SETTING_OSD_SPEED_SOURCE_DEFAULT
 );
 
-int16_t osdGetSpeedFromSelectedSource(void) {
+int osdGetSpeedFromSelectedSource(void) {
     int speed = 0;
     switch (osdCommonConfig()->speedSource) {
         case OSD_SPEED_SOURCE_GROUND:
@@ -64,7 +64,7 @@ int16_t osdGetSpeedFromSelectedSource(void) {
             break;
         case OSD_SPEED_SOURCE_AIR:
             #ifdef USE_PITOT
-            speed = (int16_t)getAirspeedEstimate();
+            speed = pitot.airSpeed;
             #endif
             break;
     }

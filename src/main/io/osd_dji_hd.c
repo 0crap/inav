@@ -537,8 +537,6 @@ static char * osdArmingDisabledReasonMessage(void)
             FALLTHROUGH;
         case ARMED:
             FALLTHROUGH;
-        case SIMULATOR_MODE:
-            FALLTHROUGH;
         case WAS_EVER_ARMED:
             break;
     }
@@ -691,7 +689,7 @@ void osdDJIFormatVelocityStr(char* buff)
         case OSD_SPEED_SOURCE_AIR:
             strcpy(sourceBuf, "AIR");
 #ifdef USE_PITOT
-            vel = getAirspeedEstimate();
+            vel = pitot.airSpeed;
 #endif
             break;
     }

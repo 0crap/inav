@@ -24,5 +24,6 @@ void mspOverrideChannels(rcChannel_t *rcChannels);
 bool mspOverrideIsReceivingSignal(void);
 bool mspOverrideIsInFailsafe(void);
 bool mspOverrideAreFlightChannelsValid(void);
+uint16_t mspOverrideGetRefreshRate(void);
 int16_t mspOverrideGetChannelValue(unsigned channelNumber);
 int16_t mspOverrideGetRawChannelValue(unsigned channelNumber);

@@ -27,7 +27,6 @@
 #include "drivers/pwm_mapping.h"
 #include "drivers/pwm_output.h"
 #include "fc/config.h"
-#include "fc/runtime_config.h"
 
 #include "sound_beeper.h"
 
@@ -45,14 +44,6 @@ void systemBeep(bool onoff)
 #if !defined(BEEPER)
     UNUSED(onoff);
 #else
-
-#ifdef USE_SIMULATOR
-	if (ARMING_FLAG(SIMULATOR_MODE)) {
-		if (simulatorData.flags & SIMU_MUTE_BEEPER) {
-			onoff = false;
-		}
-	}
-#endif
 
     if (beeperConfig()->pwmMode) {
         pwmWriteBeeper(onoff);
